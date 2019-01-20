@@ -1,0 +1,36 @@
+version: "2"
+services:
+  web:
+    image: nginx:latest
+    build: ./web
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - app
+      - db
+    environment:
+      DOMAIN: dev07.dshimizu.jp
+      CERTBOT_MAIL: shimizu.daisuke.sd@gmail.com
+    volumes:
+      - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./web/wordpress.conf:/etc/nginx/conf.d/wordpress.conf:ro
+    volumes_from:
+      - app
+  app:
+    build: ./app
+    image: php:fpm
+    env_file: .env
+    depends_on:
+      - db
+    volumes:
+      - ./wordpress:/var/www/html/wordpress:rw
+  db:
+    image: mysql:latest
+    env_file: .env
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/mysql:/var/lib/mysql

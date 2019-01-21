@@ -10,7 +10,7 @@ services:
       - app
       - db
     environment:
-      DOMAIN: dev07.dshimizu.jp
+      DOMAIN: dev01.blog.dshimizu.jp
       CERTBOT_MAIL: shimizu.daisuke.sd@gmail.com
     volumes:
       - ./web/nginx.conf:/etc/nginx/nginx.conf:ro

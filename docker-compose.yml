@@ -15,6 +15,7 @@ services:
     volumes:
       - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./web/wordpress.conf:/etc/nginx/conf.d/wordpress.conf:ro
+      - ./web/log:/var/log/nginx
     volumes_from:
       - app
   app:

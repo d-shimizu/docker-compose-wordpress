@@ -13,14 +13,14 @@ fi
 
 nginx
 
-if [ ! -e "/etc/letsencrypt/initialize" ]; then
-    rm -rf /etc/letsencrypt/live/${DOMAIN}
-    certbot certonly -n --keep-until-expiring --agree-tos \
-      --webroot --webroot-path /var/lib/letsencrypt \
-      -m ${CERTBOT_MAIL} -d ${DOMAIN}
-fi
+#if [ ! -e "/etc/letsencrypt/initialize" ]; then
+#    rm -rf /etc/letsencrypt/live/${DOMAIN}
+#    certbot certonly -n --keep-until-expiring --agree-tos \
+#      --webroot --webroot-path /var/lib/letsencrypt \
+#      -m ${CERTBOT_MAIL} -d ${DOMAIN}
+#fi
 
-touch /etc/letsencrypt/initialize
-certbot renew
+#touch /etc/letsencrypt/initialize
+#certbot renew
 
 nginx -s stop && nginx -g 'daemon off;'

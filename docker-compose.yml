@@ -10,11 +10,13 @@ services:
       - app
       - db
     environment:
-      DOMAIN: dev07.dshimizu.jp
-      CERTBOT_MAIL: shimizu.daisuke.sd@gmail.com
+      DOMAIN: dev04.blog.dshimizu.jp
     volumes:
       - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./web/wordpress.conf:/etc/nginx/conf.d/wordpress.conf:ro
+      - ./web/log:/var/log/nginx
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
     volumes_from:
       - app
   app:
@@ -25,12 +27,14 @@ services:
       - db
     volumes:
       - ./wordpress:/var/www/html/wordpress:rw
+      #- ./app/etc:/usr/local/etc
   db:
+    build: ./db
     image: mysql:latest
     env_file: .env
-    command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
       - 3306:3306
     volumes:
       - ./db/mysql:/var/lib/mysql
+      - ./db/custom_mysqld.cnf:/etc/mysql/conf.d/custom_mysqld.cnf

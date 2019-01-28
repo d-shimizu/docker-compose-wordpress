@@ -9,3 +9,7 @@ wordpress/*
 
 # Ignore db
 db/mysql/*
+
+# Ignore log
+web/log
+db/log

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-MAIL_ADDRESS=shimizu.daisuke.sd@gmail.com
-DOMAIN=dev04.blog.dshimizu.jp
+MAIL_ADDRESS=foo@example.jp
+DOMAIN=dev00.blog.dshimizu.jp
 
 
 sudo yum -y install epel-release

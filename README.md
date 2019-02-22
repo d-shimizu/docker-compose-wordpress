@@ -1,7 +1,5 @@
 # docker-compose-wordpress
 
-===
-
 Nginx, PHP(FPM), MySQL のオフィシャルのDockerイメージを組み合わせてWordpressを動かすためのDocker Composeです。
 
 ## Description

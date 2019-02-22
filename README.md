@@ -14,35 +14,47 @@ Nginx, PHP(FPM), MySQL のオフィシャルのDockerイメージを組み合わ
 
 ## Install
 
-  * download
-  
-      git clone https://github.com/daisukeshimizu/docker-compose-wordpress.git
+* download
 
-      cd docker-compose-wordpress
+```
+git clone https://github.com/daisukeshimizu/docker-compose-wordpress.git
 
-  * Change Domain on docker-compose.yml & wordpress.conf
-  
-      vim docker-compose.yml
+cd docker-compose-wordpress
+```
 
-      vim wordpress.conf
+* Change Domain on docker-compose.yml & wordpress.conf
 
-  * donwload latest wordpress
-  
-      ./download_wordpress.sh
+```
+vim docker-compose.yml
 
-  * build
-  
-      docker-compose build
+vim wordpress.conf
+```
+
+* donwload latest wordpress
+
+```
+./download_wordpress.sh
+```
+
+* build
+
+```
+docker-compose build
       
-      docker-compose up -d
+docker-compose up -d
+```
 
-  * get let's encrypt certificate
-  
-      ./letsencrypt.sh
+* get let's encrypt certificate
 
-  * restart
-  
-       docker-compose restart
+```
+./letsencrypt.sh
+```
+
+* restart
+
+```
+docker-compose restart
+```
 
 ## Licence
 

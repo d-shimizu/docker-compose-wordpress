@@ -50,5 +50,5 @@ Nginx, PHP(FPM), MySQL のオフィシャルのDockerイメージを組み合わ
 
 ## Author
 
-[Daisuke SHIMIZU](https://github.com/daisukeshimizu
+[Daisuke SHIMIZU](https://github.com/daisukeshimizu)
 

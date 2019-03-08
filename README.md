@@ -10,9 +10,7 @@ Nginx, PHP(FPM), MySQL のオフィシャルのDockerイメージを組み合わ
 * Docker (docker-ce-18.09.1-3)
 * Docker Compose
 
-## Usage
-
-## Install
+## Install&Usage
 
 * download
 

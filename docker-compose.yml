@@ -2,10 +2,12 @@ version: "2"
 services:
   web:
     image: nginx:latest
-    build: ./web
+    build:
+      context: .
+      dockerfile: ./web/Dockerfile
     ports:
-      - "80:80"
-      - "443:443"
+      - "10080:80"
+      - "10443:443"
     depends_on:
       - app
       - db
@@ -20,7 +22,9 @@ services:
     volumes_from:
       - app
   app:
-    build: ./app
+    build: 
+      context: .
+      dockerfile: ./app/Dockerfile
     image: php:fpm
     env_file: .env
     depends_on:

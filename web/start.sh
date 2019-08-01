@@ -9,6 +9,8 @@ if [ ! -d "/etc/letsencrypt/live/${DOMAIN}" ]; then
     mkdir -p /var/lib/letsencrypt
     cp -pr /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/letsencrypt/live/${DOMAIN}/fullchain.pem
     cp -pr /etc/ssl/private/ssl-cert-snakeoil.key /etc/letsencrypt/live/${DOMAIN}/privkey.pem
+    #sed -i -e "s/MYDOMAIN/${DOMAIN}/g" /etc/nginx/conf.d/wordpress.conf
+    sed -i -e s/MYDOMAIN/${DOMAIN}/g /etc/nginx/conf.d/wordpress.conf
 fi
 
 nginx

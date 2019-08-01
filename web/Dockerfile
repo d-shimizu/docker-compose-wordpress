@@ -7,10 +7,11 @@ RUN apt-get update \
       ssl-cert \
     && rm -rf /var/lib/apt/lists/*
 
-COPY start.sh /start.sh
+
+COPY ./web/nginx.conf /etc/nginx/nginx.conf
+COPY ./web/wordpress.conf /etc/nginx/conf.d/wordpress.conf
+COPY ./web/.htpasswd /etc/nginx/conf.d/.htpasswd
+
+COPY ./web/start.sh /start.sh
 RUN chmod +x /start.sh
 CMD /start.sh
-
-COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY ./wordpress.conf /etc/nginx/conf.d/wordpress.conf
-COPY ./.htpasswd /etc/nginx/conf.d/.htpasswd

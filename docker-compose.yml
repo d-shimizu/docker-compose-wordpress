@@ -1,4 +1,5 @@
-version: "2"
+version: "3.7"
+
 services:
   web:
     image: nginx:latest
@@ -10,7 +11,7 @@ services:
       - "10443:443"
     depends_on:
       - app
-      - db
+    #  - db
     environment:
       DOMAIN: dev00.blog.dshimizu.jp
     volumes:
@@ -19,8 +20,10 @@ services:
       - ./web/log:/var/log/nginx
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
-    volumes_from:
-      - app
+      - ./wordpress:/var/www/html/wordpress
+      #- type: bind
+      #  source: ./wordpress
+      #  target: /var/www/html/wordpress
   app:
     build: 
       context: .
@@ -31,7 +34,11 @@ services:
       - db
     volumes:
       - ./wordpress:/var/www/html/wordpress:rw
-      #- ./app/etc:/usr/local/etc
+      #- type: bind
+      #  source: ./wordpress
+      #  target: /var/www/html/wordpress
+        #volume:
+        #  nocopy: true
   db:
     build: ./db
     image: mysql:latest
@@ -42,3 +49,13 @@ services:
     volumes:
       - ./db/mysql:/var/lib/mysql
       - ./db/custom_mysqld.cnf:/etc/mysql/conf.d/custom_mysqld.cnf
+#volumes:
+#  wordpress:
+#    external: true
+#volumes:
+#  app_root:
+#    driver: local
+#    driver_opts:
+#      type: none
+#      device: ./wordpress
+#      o: bind

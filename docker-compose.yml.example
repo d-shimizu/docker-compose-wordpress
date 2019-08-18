@@ -1,44 +1,33 @@
-version: "3.7"
-
+version: "2"
 services:
   web:
     image: nginx:latest
-    build:
-      context: .
-      dockerfile: ./web/Dockerfile
+    build: ./web
     ports:
-      - "10080:80"
-      - "10443:443"
+      - "80:80"
+      - "443:443"
     depends_on:
       - app
-    #  - db
+      - db
     environment:
-      DOMAIN: dev00.blog.dshimizu.jp
+      DOMAIN: example.jp
     volumes:
       - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./web/wordpress.conf:/etc/nginx/conf.d/wordpress.conf:ro
       - ./web/log:/var/log/nginx
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
-      - ./wordpress:/var/www/html/wordpress
-      #- type: bind
-      #  source: ./wordpress
-      #  target: /var/www/html/wordpress
+    volumes_from:
+      - app
   app:
-    build: 
-      context: .
-      dockerfile: ./app/Dockerfile
+    build: ./app
     image: php:fpm
     env_file: .env
     depends_on:
       - db
     volumes:
       - ./wordpress:/var/www/html/wordpress:rw
-      #- type: bind
-      #  source: ./wordpress
-      #  target: /var/www/html/wordpress
-        #volume:
-        #  nocopy: true
+      #- ./app/etc:/usr/local/etc
   db:
     build: ./db
     image: mysql:latest
@@ -49,13 +38,3 @@ services:
     volumes:
       - ./db/mysql:/var/lib/mysql
       - ./db/custom_mysqld.cnf:/etc/mysql/conf.d/custom_mysqld.cnf
-#volumes:
-#  wordpress:
-#    external: true
-#volumes:
-#  app_root:
-#    driver: local
-#    driver_opts:
-#      type: none
-#      device: ./wordpress
-#      o: bind

@@ -1,3 +1,0 @@
-[mysqld]
-### For MySQL 8.0 Server to MySQL 5.7  or Earlier Client
-default_authentication_plugin=mysql_native_password

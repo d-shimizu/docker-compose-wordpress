@@ -8,8 +8,8 @@
 wordpress/*
 
 # Ignore db
-db/mysql/*
+docker/mysql/*
 
 # Ignore log
-web/log
-db/log
+docker/nginx/log
+docker/mysql/log
